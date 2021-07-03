@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import setup.listeners.ConfirmListener;
@@ -69,7 +70,14 @@ public class SetupFrame extends JFrame implements ConfirmListener, NumPlayersCha
 		}
 		// we got some errors, display a message
 		else {
-			// TODO
+			final StringBuilder sb = new StringBuilder();
+
+			for (final String errorMessage : errorMessages) {
+				sb.append(errorMessage);
+				sb.append("\n");
+			}
+
+			JOptionPane.showMessageDialog(this, sb.toString());
 		}
 	}
 }

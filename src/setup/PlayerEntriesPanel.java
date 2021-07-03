@@ -2,7 +2,10 @@ package setup;
 
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 import javax.swing.BoxLayout;
@@ -66,14 +69,80 @@ public class PlayerEntriesPanel extends JPanel {
 	}
 
 	/**
-	 * This method checks for no duplicate names and no duplicate colors.
+	 * This method checks for no duplicate or empty names and no duplicate colors.
 	 * 
 	 * @return A list of error messages regarding invalid configuration. If this
 	 *         list is empty, then the configuration is valid.
 	 */
 	public List<String> validateEntries() {
-		// TODO
-		return new ArrayList<>();
+		final List<String> errorMessages = new ArrayList<>();
+
+		final String[] playerNames = this.getPlayerNames();
+		final TreeColor[] treeColors = this.getTreeColors();
+
+		// check empty names
+		for (final String playerName : playerNames) {
+			if (playerName.isEmpty()) {
+				errorMessages.add("Every player must have a name.");
+				break;
+			}
+		}
+
+		// check duplicate names
+		final Set<String> seenPlayerNames = new HashSet<>();
+
+		for (final String playerName : playerNames) {
+			if (!playerName.isEmpty()) {
+				if (seenPlayerNames.contains(playerName)) {
+					errorMessages.add("Cannot have duplicate player names.");
+					break;
+				}
+
+				seenPlayerNames.add(playerName);
+			}
+		}
+
+		// check duplicate tree colors
+		final Set<TreeColor> seenTreeColors = new HashSet<>();
+
+		for (final TreeColor treeColor : treeColors) {
+			if (seenTreeColors.contains(treeColor)) {
+				errorMessages.add("Cannot have duplicate colors.");
+				break;
+			}
+
+			seenTreeColors.add(treeColor);
+		}
+
+		return errorMessages;
+	}
+
+	private String[] getPlayerNames() {
+		final String[] playerNames = new String[this.entryPanels.size()];
+
+		int i = 0;
+		final Iterator<PlayerEntryPanel> it = this.entryPanels.iterator();
+
+		while (it.hasNext()) {
+			playerNames[i] = it.next().getPlayerName();
+			i++;
+		}
+
+		return playerNames;
+	}
+
+	private TreeColor[] getTreeColors() {
+		final TreeColor[] treeColors = new TreeColor[this.entryPanels.size()];
+
+		int i = 0;
+		final Iterator<PlayerEntryPanel> it = this.entryPanels.iterator();
+
+		while (it.hasNext()) {
+			treeColors[i] = it.next().getTreeColor();
+			i++;
+		}
+
+		return treeColors;
 	}
 
 	private void addPlayerEntryPanel(final PlayerEntryPanel panel) {
@@ -129,6 +198,14 @@ public class PlayerEntriesPanel extends JPanel {
 
 			this.aiCheckBox = new JCheckBox();
 			super.add(this.aiCheckBox);
+		}
+
+		private String getPlayerName() {
+			return this.nameField.getText().trim();
+		}
+
+		private TreeColor getTreeColor() {
+			return (TreeColor) this.colorBox.getSelectedItem();
 		}
 	}
 
