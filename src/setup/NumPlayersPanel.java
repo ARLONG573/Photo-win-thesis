@@ -1,6 +1,5 @@
 package setup;
 
-import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -22,8 +21,6 @@ public class NumPlayersPanel extends JPanel {
 	private NumPlayersChangedListener listener;
 
 	public NumPlayersPanel() {
-		super.setLayout(new FlowLayout());
-
 		final JLabel numPlayersLabel = new JLabel("Number of players: ");
 		numPlayersLabel.setFont(new Font("Arial", Font.PLAIN, 24));
 		super.add(numPlayersLabel);

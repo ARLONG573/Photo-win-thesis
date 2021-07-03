@@ -1,8 +1,10 @@
 package setup;
 
 import java.awt.BorderLayout;
+import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import setup.listeners.ConfirmListener;
 import setup.listeners.NumPlayersChangedListener;
@@ -46,11 +48,28 @@ public class SetupFrame extends JFrame implements ConfirmListener, NumPlayersCha
 
 	@Override
 	public void numPlayersChanged(final int numPlayers) {
-		System.out.println(numPlayers + " players");
+		this.playerEntriesPanel.setNumPlayers(numPlayers);
+
+		// changing the number of players changes the number of player entry panels in
+		// the frame, so packing it will make it look nicer
+		SwingUtilities.invokeLater(() -> {
+			super.pack();
+			super.repaint();
+			super.revalidate();
+		});
 	}
 
 	@Override
 	public void confirmButtonPressed() {
-		System.out.println("confirm");
+		final List<String> errorMessages = this.playerEntriesPanel.validateEntries();
+
+		// no errors, the configuration is valid
+		if (errorMessages.isEmpty()) {
+			// TODO
+		}
+		// we got some errors, display a message
+		else {
+			// TODO
+		}
 	}
 }
