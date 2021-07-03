@@ -22,7 +22,8 @@ public enum TreeColor {
 		return this.renderColor;
 	}
 
-	public String getDisplayName() {
+	@Override
+	public String toString() {
 		return this.displayName;
 	}
 }
