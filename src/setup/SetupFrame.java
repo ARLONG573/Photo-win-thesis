@@ -25,20 +25,23 @@ public class SetupFrame extends JFrame implements ConfirmListener, NumPlayersCha
 
 	public SetupFrame() {
 		super("Player Setup");
-		super.setLayout(new BorderLayout());
-		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		super.setLocationRelativeTo(null); // put the frame in the center of the screen
 
 		this.numPlayersPanel = new NumPlayersPanel();
 		this.numPlayersPanel.setNumPlayersChangedListener(this);
-		super.add(this.numPlayersPanel, BorderLayout.NORTH);
 
 		this.playerEntriesPanel = new PlayerEntriesPanel();
-		super.add(this.playerEntriesPanel, BorderLayout.CENTER);
 
 		this.confirmPanel = new ConfirmPanel();
 		this.confirmPanel.setConfirmListener(this);
+
+		super.setLayout(new BorderLayout());
+		super.add(this.numPlayersPanel, BorderLayout.NORTH);
+		super.add(this.playerEntriesPanel, BorderLayout.CENTER);
 		super.add(this.confirmPanel, BorderLayout.SOUTH);
+		super.pack();
+		
+		super.setLocationRelativeTo(null); // put the frame in the center of the screen
+		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	@Override
