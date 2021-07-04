@@ -1,4 +1,4 @@
-import setup.SetupFrame;
+import setup.ui.SetupFrame;
 
 /**
  * @author Aaron Tetens

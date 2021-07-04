@@ -1,4 +1,4 @@
-package setup;
+package setup.ui;
 
 import java.awt.Font;
 

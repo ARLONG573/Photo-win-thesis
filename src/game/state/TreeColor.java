@@ -1,4 +1,4 @@
-package data;
+package game.state;
 
 import java.awt.Color;
 

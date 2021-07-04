@@ -1,4 +1,4 @@
-package setup;
+package setup.ui;
 
 import java.awt.Font;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
-import data.TreeColor;
+import game.state.TreeColor;
 
 /**
  * One player entry consists of a player's name, color, and whether or not they

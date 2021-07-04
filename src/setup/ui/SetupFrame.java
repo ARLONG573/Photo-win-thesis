@@ -1,4 +1,4 @@
-package setup;
+package setup.ui;
 
 import java.awt.BorderLayout;
 import java.util.List;
@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import game.ui.GameFrame;
 import setup.listeners.ConfirmListener;
 import setup.listeners.NumPlayersChangedListener;
 
@@ -66,7 +67,9 @@ public class SetupFrame extends JFrame implements ConfirmListener, NumPlayersCha
 
 		// no errors, the configuration is valid
 		if (errorMessages.isEmpty()) {
-			// TODO
+			// TODO send setup data to game frame
+			new GameFrame().setVisible(true);
+			super.dispose();
 		}
 		// we got some errors, display a message
 		else {
