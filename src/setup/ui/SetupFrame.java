@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import game.state.PhotosynthesisState;
 import game.ui.GameFrame;
 import setup.listeners.ConfirmListener;
 import setup.listeners.NumPlayersChangedListener;
@@ -67,8 +68,8 @@ public class SetupFrame extends JFrame implements ConfirmListener, NumPlayersCha
 
 		// no errors, the configuration is valid
 		if (errorMessages.isEmpty()) {
-			// TODO send setup data to game frame
-			new GameFrame().setVisible(true);
+			final PhotosynthesisState initialState = new PhotosynthesisState(this.playerEntriesPanel.getPlayerInfo());
+			new GameFrame(initialState).setVisible(true);
 			super.dispose();
 		}
 		// we got some errors, display a message

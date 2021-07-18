@@ -14,13 +14,13 @@ import setup.listeners.ConfirmListener;
  * 
  * @author Aaron Tetens
  */
-public class ConfirmPanel extends JPanel {
+class ConfirmPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	private ConfirmListener listener;
 
-	public ConfirmPanel() {
+	ConfirmPanel() {
 		super.setLayout(new BorderLayout());
 
 		final JButton confirmButton = new JButton("Confirm");
@@ -29,7 +29,7 @@ public class ConfirmPanel extends JPanel {
 		super.add(confirmButton, BorderLayout.EAST);
 	}
 
-	public void setConfirmListener(final ConfirmListener listener) {
+	void setConfirmListener(final ConfirmListener listener) {
 		this.listener = listener;
 	}
 

@@ -19,6 +19,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+import game.state.PlayerInfo;
 import game.state.TreeColor;
 
 /**
@@ -27,7 +28,7 @@ import game.state.TreeColor;
  * 
  * @author Aaron Tetens
  */
-public class PlayerEntriesPanel extends JPanel {
+class PlayerEntriesPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private static final int DEFAULT_NUM_PLAYERS = 4;
@@ -36,11 +37,11 @@ public class PlayerEntriesPanel extends JPanel {
 	// so a stack is the most logical structure to track the remaining panels
 	private final Stack<PlayerEntryPanel> entryPanels;
 
-	public PlayerEntriesPanel() {
+	PlayerEntriesPanel() {
 		this(DEFAULT_NUM_PLAYERS);
 	}
 
-	public PlayerEntriesPanel(final int numInitialPlayers) {
+	PlayerEntriesPanel(final int numInitialPlayers) {
 		super.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		this.entryPanels = new Stack<>();
@@ -49,7 +50,7 @@ public class PlayerEntriesPanel extends JPanel {
 		}
 	}
 
-	public void setNumPlayers(final int numPlayers) {
+	void setNumPlayers(final int numPlayers) {
 		// we need to add panels
 		if (numPlayers > this.entryPanels.size()) {
 			final int numPanelsToAdd = numPlayers - this.entryPanels.size();
@@ -74,7 +75,7 @@ public class PlayerEntriesPanel extends JPanel {
 	 * @return A list of error messages regarding invalid configuration. If this
 	 *         list is empty, then the configuration is valid.
 	 */
-	public List<String> validateEntries() {
+	List<String> validateEntries() {
 		final List<String> errorMessages = new ArrayList<>();
 
 		final String[] playerNames = this.getPlayerNames();
@@ -115,6 +116,10 @@ public class PlayerEntriesPanel extends JPanel {
 		}
 
 		return errorMessages;
+	}
+
+	PlayerInfo[] getPlayerInfo() {
+		return null;
 	}
 
 	private String[] getPlayerNames() {
@@ -219,7 +224,7 @@ public class PlayerEntriesPanel extends JPanel {
 
 		private final int limit;
 
-		JTextFieldLimit(final int limit) {
+		private JTextFieldLimit(final int limit) {
 			super();
 
 			this.limit = limit;

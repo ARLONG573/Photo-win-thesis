@@ -14,13 +14,13 @@ import setup.listeners.NumPlayersChangedListener;
  * 
  * @author Aaron Tetens
  */
-public class NumPlayersPanel extends JPanel {
+class NumPlayersPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	private NumPlayersChangedListener listener;
 
-	public NumPlayersPanel() {
+	NumPlayersPanel() {
 		final JLabel numPlayersLabel = new JLabel("Number of players: ");
 		numPlayersLabel.setFont(new Font("Arial", Font.PLAIN, 24));
 		super.add(numPlayersLabel);
@@ -30,7 +30,7 @@ public class NumPlayersPanel extends JPanel {
 		super.add(new NumPlayersButton(4));
 	}
 
-	public void setNumPlayersChangedListener(final NumPlayersChangedListener listener) {
+	void setNumPlayersChangedListener(final NumPlayersChangedListener listener) {
 		this.listener = listener;
 	}
 
