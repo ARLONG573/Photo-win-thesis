@@ -118,8 +118,29 @@ class PlayerEntriesPanel extends JPanel {
 		return errorMessages;
 	}
 
+	/**
+	 * This method assumes that the data in the player entry panels is valid.
+	 * 
+	 * @return The unique player info of each player
+	 */
 	PlayerInfo[] getPlayerInfo() {
-		return null;
+		final PlayerInfo[] playerInfo = new PlayerInfo[this.entryPanels.size()];
+
+		int i = 0;
+		final Iterator<PlayerEntryPanel> it = this.entryPanels.iterator();
+
+		while (it.hasNext()) {
+			final PlayerEntryPanel panel = it.next();
+
+			final String name = panel.getPlayerName();
+			final TreeColor color = panel.getTreeColor();
+			final boolean isAI = panel.isAI();
+
+			playerInfo[i] = new PlayerInfo(name, color, isAI);
+			i++;
+		}
+
+		return playerInfo;
 	}
 
 	private String[] getPlayerNames() {
@@ -211,6 +232,10 @@ class PlayerEntriesPanel extends JPanel {
 
 		private TreeColor getTreeColor() {
 			return (TreeColor) this.colorBox.getSelectedItem();
+		}
+
+		private boolean isAI() {
+			return this.aiCheckBox.isSelected();
 		}
 	}
 
