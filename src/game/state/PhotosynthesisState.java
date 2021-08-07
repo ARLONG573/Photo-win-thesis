@@ -9,8 +9,19 @@ import api.GameState;
  */
 public class PhotosynthesisState implements GameState {
 
-	public PhotosynthesisState(final PlayerInfo[] playerInfo) {
+	private final Player[] players;
 
+	private int lastPlayer;
+	private int currentPlayer;
+
+	public PhotosynthesisState(final PlayerInfo[] playerInfo) {
+		this.players = new Player[playerInfo.length];
+		for (int i = 0; i < this.players.length; i++) {
+			this.players[i] = new Player(playerInfo[i]);
+		}
+
+		this.lastPlayer = -1;
+		this.currentPlayer = 0;
 	}
 
 	@Override
