@@ -1,8 +1,10 @@
 package game.ui;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -17,9 +19,33 @@ class PlayersPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	private final PlayerPanel[] playerPanels;
+
 	PlayersPanel(final Player[] players) {
-		for (final Player player : players) {
-			super.add(new PlayerPanel(player));
+		this.playerPanels = new PlayerPanel[players.length];
+
+		for (int i = 0; i < players.length; i++) {
+			final Player player = players[i];
+			final PlayerPanel playerPanel = new PlayerPanel(player);
+
+			super.add(playerPanel);
+			this.playerPanels[i] = playerPanel;
+		}
+	}
+
+	/**
+	 * The current player is shown by adding a black border around their panel.
+	 * 
+	 * @param index
+	 *            The index of the player to show as the current player
+	 */
+	void setCurrentPlayer(final int index) {
+		for (int i = 0; i < this.playerPanels.length; i++) {
+			if (i == index) {
+				this.playerPanels[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			} else {
+				this.playerPanels[i].setBorder(BorderFactory.createEmptyBorder());
+			}
 		}
 	}
 
@@ -35,8 +61,9 @@ class PlayersPanel extends JPanel {
 
 			this.textArea = new JTextArea();
 			this.textArea.setFont(new Font("Arial", Font.PLAIN, 24));
+			this.textArea.setForeground(Color.BLACK);
 			this.textArea.setBackground(this.player.getRenderColor());
-			this.textArea.setEnabled(false);
+			this.textArea.setEditable(false);
 			super.add(this.textArea);
 		}
 

@@ -22,6 +22,7 @@ public class GameFrame extends JFrame {
 		super("Photo-win-thesis");
 
 		this.playersPanel = new PlayersPanel(initialState.getPlayers());
+		this.playersPanel.setCurrentPlayer(initialState.getCurrentPlayer());
 
 		super.setLayout(new BorderLayout());
 		super.add(this.playersPanel, BorderLayout.NORTH);

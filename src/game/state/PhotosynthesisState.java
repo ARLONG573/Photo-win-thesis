@@ -28,6 +28,10 @@ public class PhotosynthesisState implements GameState {
 		return this.players;
 	}
 
+	public int getCurrentPlayer() {
+		return this.currentPlayer;
+	}
+
 	@Override
 	public int getLastPlayer() {
 		// TODO Auto-generated method stub
