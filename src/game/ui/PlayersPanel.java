@@ -69,14 +69,9 @@ class PlayersPanel extends JPanel {
 
 		@Override
 		protected void paintComponent(final Graphics g) {
-			final StringBuilder sb = new StringBuilder();
-			sb.append(this.player.getName());
-			sb.append("\n");
-			sb.append("Victory points: " + this.player.getVP());
-			sb.append("\n");
-			sb.append("Light points: " + this.player.getLP());
+			super.paintComponent(g);
 
-			this.textArea.setText(sb.toString());
+			this.textArea.setText(this.player.toString());
 		}
 	}
 }

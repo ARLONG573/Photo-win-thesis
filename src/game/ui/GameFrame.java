@@ -3,6 +3,7 @@ package game.ui;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import game.state.PhotosynthesisState;
 
@@ -18,16 +19,28 @@ public class GameFrame extends JFrame {
 
 	private final PlayersPanel playersPanel;
 
+	private PhotosynthesisState state;
+
 	public GameFrame(final PhotosynthesisState initialState) {
 		super("Photo-win-thesis");
 
+		this.state = initialState;
 		this.playersPanel = new PlayersPanel(initialState.getPlayers());
-		this.playersPanel.setCurrentPlayer(initialState.getCurrentPlayer());
 
 		super.setLayout(new BorderLayout());
 		super.add(this.playersPanel, BorderLayout.NORTH);
 
 		super.setExtendedState(JFrame.MAXIMIZED_BOTH); // full screen
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		this.updateUI();
+	}
+
+	private void updateUI() {
+		SwingUtilities.invokeLater(() -> {
+			this.playersPanel.setCurrentPlayer(this.state.getCurrentPlayer());
+
+			super.repaint();
+		});
 	}
 }
